@@ -1,6 +1,6 @@
 // Base de conhecimento do Calouro Orientado.
 //
-// status 'verified': confirmado em fonte oficial (Manual do Aluno UCSal 2025) ou na base do projeto.
+// status 'verified': confirmado em fonte oficial (Manual do Aluno UCSal 2025, Cartilha do Estudante FIES da CAIXA) ou na base do projeto.
 // status 'partial' : só parte está confirmada. `pending` diz o que falta e o app mostra os canais oficiais.
 //
 // Como o texto é comparado: sem acentos e sem maiúsculas. Uma palavra-chave casa quando começa
@@ -8,12 +8,15 @@
 // Vence a entrada cuja palavra-chave encontrada for a mais longa.
 
 export const MANUAL_URL = 'https://www.ucsal.br/wp-content/uploads/2025/08/Manual-do-Aluno-_-2025.pdf'
+export const CARTILHA_URL = '' // cole aqui o link oficial da cartilha da CAIXA quando tiver
 
 const manual = (secao) => ({ tipo: 'manual', secao })
+const cartilha = (secao) => ({ tipo: 'cartilha', secao })
 const base = { tipo: 'base' }
 const E = (o) => ({ steps: [], notes: [], links: [], ordered: true, pending: '', ...o })
 
 const WA = { label: 'WhatsApp (71) 3206-7800', href: 'https://wa.me/557132067800' }
+const SIFES = { label: 'SIFESWeb (CAIXA)', href: 'http://sifesweb.caixa.gov.br/' }
 
 export const canais = [
   { label: 'WhatsApp da UCSal: (71) 3206-7800', href: 'https://wa.me/557132067800' },
@@ -149,7 +152,7 @@ export const knowledge = [
     id: 'financiamento',
     status: 'verified',
     title: 'Bolsas, financiamento e descontos',
-    keywords: ['fies', 'credies', 'financiamento', 'bolsa', 'desconto'],
+    keywords: ['credies', 'financiamento', 'bolsa', 'desconto', 'inscricao no fies', 'inscrever no fies', 'me inscrevo no fies', 'fiesselecao', 'fies selecao', 'enem'],
     intro: 'Programas citados no Manual do Aluno 2025:',
     ordered: false,
     steps: [
@@ -157,10 +160,229 @@ export const knowledge = [
       'CredIES: crédito educacional que permite pagar parte da mensalidade durante o curso e o restante depois, sem juros remuneratórios. Inscrição pelo site fundacred.org.br, com percentual de até 50%.',
       'Descontos da UCSal não são cumulativos e não valem para pagamento após o vencimento.',
     ],
-    notes: ['Regras e prazos mudam a cada processo seletivo: confira nos sites oficiais e nos editais atuais.'],
+    notes: [
+      'Regras e prazos mudam a cada processo seletivo: confira nos sites oficiais e nos editais atuais.',
+      'Já tem FIES? Pergunte "Como funciona o FIES?" ou "Como renovo meu FIES?".',
+    ],
     links: [{ label: 'FiesSeleção', href: 'https://fiesselecaoaluno.mec.gov.br/' }],
     fontes: [manual('5.2 e 5.3')],
   }),
+
+  // ---------------- FIES (Cartilha do Estudante CAIXA v4.7) ----------------
+  E({
+    id: 'fies',
+    status: 'verified',
+    title: 'FIES: o que é o Novo FIES e seus deveres',
+    keywords: ['fies', 'financiamento estudantil', 'fundo de financiamento'],
+    intro: 'O Novo FIES é o financiamento estudantil do governo (contratos a partir de 2018, Portaria MEC 209/2018). O que ele traz:',
+    ordered: false,
+    steps: [
+      'Juros zero para quem tem renda bruta familiar per capita de até 3 salários mínimos.',
+      'A amortização (pagamento do saldo devedor) começa logo depois do fim do curso, respeitando o limite de renda.',
+      'Você paga a coparticipação, que é a parte da mensalidade não financiada.',
+      'A CAIXA é o Agente Financeiro e o Agente Operador dos contratos.',
+    ],
+    notes: [
+      'Como entrar: o pedido é feito no FIES Seleção (sistema do MEC). Quem é selecionado vai à instituição para entrevista e entrega de documentos, e recebe o DRI (Documento de Regularidade de Inscrição). Depois contrata pelo app FIES CAIXA (para quem não tem fiador, cônjuge ou representante legal; dias úteis, 9h às 19h) ou em uma agência da CAIXA.',
+      'Deveres do estudante: estar matriculado, ter aproveitamento acadêmico de 75% das matérias do curso, manter o contrato em dia e fazer o aditamento de renovação (ou de suspensão) a cada semestre.',
+      'Não precisa mais do financiamento? Formalize o encerramento no SIFESWeb e conclua na agência.',
+      'Requisitos de inscrição e programas parecidos: pergunte "Tem bolsa de estudo?".',
+      'Atendimento CAIXA: Alô CAIXA 4004 0104 (capitais e regiões metropolitanas) · 0800 104 0104 (demais regiões) · SAC 0800 726 0101 · Ouvidoria 0800 725 7474.',
+    ],
+    links: [{ label: 'FIES Seleção (MEC)', href: 'https://fiesselecaoaluno.mec.gov.br/' }, SIFES],
+    fontes: [cartilha('1 e 11')],
+  }),
+  E({
+    id: 'fies-sifes',
+    status: 'verified',
+    title: 'SIFESWeb e app FIES CAIXA: primeiro acesso',
+    keywords: ['sifes', 'app fies', 'app do fies', 'aplicativo do fies', 'cadastro no fies', 'cadastro do fies', 'cadastrar no fies', 'acessar o fies', 'acesso ao fies', 'login caixa', 'hotmail', 'link invalido', 'link do email', 'link do e mail', 'link que recebi'],
+    intro: 'O SIFESWeb é o sistema da CAIXA em que você opera seu contrato do Novo FIES (aditamento, suspensão, dilatação, encerramento e boletos). Para o primeiro acesso:',
+    steps: [
+      'Acesse sifesweb.caixa.gov.br e clique em "Cadastre-se". Se você já tem cadastro no login.caixa de outro sistema, não precisa se cadastrar: entre com a senha que já tem.',
+      'Preencha CPF, nome completo, data de nascimento, e-mail e uma senha numérica de 6 posições. Marque "Não sou um robô" e clique em "Cadastre-se".',
+      'Abra o e-mail da CAIXA (olhe o spam também) e clique no link de verificação, que expira em 15 minutos.',
+      'Informe CPF e senha e clique em "Entrar". Repita quando o sistema redirecionar para o login.',
+      'No primeiro acesso, confirme que quer entrar como "Estudante".',
+    ],
+    notes: [
+      'Mensagem de que o MEC ainda não enviou seus dados: confira o calendário do MEC e tente outro dia. Mensagem pedindo a assinatura do contrato: ela é feita na agência da CAIXA (veja o prazo na sua DRI).',
+      'E-mail @hotmail.com, @live.com ou @outlook.com: desmarque "Visualização de Links" em Opções > Layout > Visualizações de Links, porque ele invalida o link antes de você clicar. Depois, limpe cookies e histórico, reinicie o navegador e tente de novo.',
+      'Se o SIFES mostrar tela de erro, limpe o histórico de navegação e entre de novo. A cartilha recomenda Windows 10 e os navegadores Chrome, Firefox ou Edge.',
+      'Também dá para operar pelo app FIES CAIXA.',
+    ],
+    links: [SIFES],
+    fontes: [cartilha('2 e 10')],
+  }),
+  E({
+    id: 'fies-aditamento',
+    status: 'partial',
+    title: 'FIES: aditamento (renovação semestral)',
+    keywords: ['aditament', 'aditar', 'renovar o fies', 'renovar meu fies', 'renovo meu fies', 'renovo o fies', 'renovar fies', 'renovacao do fies', 'renovacao do meu fies', 'renovar o contrato do fies', 'renovacao do contrato do fies', 'renovacao semestral', 'prazo do fies'],
+    intro: 'O aditamento é a renovação semestral do contrato do Novo FIES. A CPSA da UCSal inicia o pedido e você valida no SIFESWeb ou no app FIES CAIXA:',
+    steps: [
+      'Espere a CPSA iniciar o aditamento do semestre e confira se o calendário está aberto. Sem isso, a opção não aparece para você.',
+      'No SIFESWeb, vá em Contrato FIES > Manutenção > Aditamento Renovação. No app FIES CAIXA, toque no ícone Aditamento (ele aparece quando o aditamento está "Pendente de Validação").',
+      'Confira os dados: instituição, curso, semestre a cursar, semestres já financiados, valor da semestralidade, percentual de financiamento e a parte que você paga.',
+      'Responda se os valores da semestralidade, o turno, a duração do curso e os semestres concluídos estão corretos. No site, marque antes o Termo de Aceite de Condições Contratuais.',
+      'Diga se quer alterar o percentual de financiamento (veja "FIES Social e percentual") e se quer alterar dados cadastrais ou fiador. Você só altera e-mail e telefones.',
+      'Clique em "Confirmar aditamento". Simplificado: pegue com a CPSA a via do DRM assinada. Não simplificado (por exemplo, renda do fiador insuficiente ou troca de fiador): pegue o DRM na CPSA e vá à agência da CAIXA, com o fiador, para concluir.',
+    ],
+    notes: [
+      'Você precisa estar adimplente. A CAIXA leva até 5 dias úteis para reconhecer um pagamento, então não deixe para pagar no último dia do prazo.',
+      'Não dá para aditar com semestre anterior sem aditamento ou suspensão, nem com o contrato encerrado.',
+      'Dados errados? Responda "Não" na pergunta sobre a semestralidade e confirme: o aditamento volta para a CPSA corrigir.',
+      'Aditamento não simplificado que expirou: valide de novo para receber novo prazo na agência.',
+      'Fiador: a soma da renda bruta mensal dos fiadores precisa ser de pelo menos 2 vezes o valor da mensalidade (1 vez para bolsista do Prouni).',
+      'Perdeu um semestre anterior? Use Contrato FIES > Manutenção > Pendência de Aditamento (só para semestres anteriores ao atual e se estiver "Pendente de validação"). Nos outros status, peça à UCSal para iniciar o aditamento.',
+    ],
+    pending: 'O prazo final do aditamento do semestre atual (a CAIXA divulga o calendário a cada semestre) e o prazo interno da UCSal para a CPSA.',
+    links: [SIFES],
+    fontes: [cartilha('3 e 10')],
+  }),
+  E({
+    id: 'fies-cpsa',
+    status: 'partial',
+    title: 'CPSA: a comissão do FIES na instituição',
+    keywords: ['cpsa', 'comissao permanente', 'supervisao e acompanhamento', 'drm', 'drd', 'documento de regularidade'],
+    intro: 'A CPSA (Comissão Permanente de Supervisão e Acompanhamento) é a comissão da instituição de ensino que cuida do FIES. Segundo a cartilha da CAIXA, ela:',
+    ordered: false,
+    steps: [
+      'Valida as informações que você prestou na inscrição do FIES.',
+      'Inicia o aditamento de renovação de todo semestre, que depois você valida no SIFESWeb ou no app.',
+      'Corrige dados divergentes (semestralidade, turno, duração, semestres concluídos) quando você rejeita um aditamento.',
+      'Valida pedidos de suspensão e de dilatação e entrega os documentos de regularidade: o DRM na renovação (assinado pela CPSA) e o DRD na dilatação (só para sua guarda).',
+    ],
+    pending: 'Local, horário de atendimento e contato da CPSA da UCSal.',
+    fontes: [cartilha('3, 5 e 6')],
+  }),
+  E({
+    id: 'fies-suspensao',
+    status: 'verified',
+    title: 'FIES: suspender o contrato',
+    keywords: ['suspens', 'suspend', 'trancar o fies', 'trancar meu fies', 'trancar fies', 'pausar o fies', 'pausar meu fies', 'pausa do fies'],
+    intro: 'Se em um semestre você não for usar o serviço educacional, é você quem precisa pedir a suspensão do contrato do FIES. Só trancar a matrícula na instituição NÃO suspende o financiamento.',
+    steps: [
+      'No SIFESWeb, vá em Contrato FIES > Manutenção > Solicitar Suspensão (ou toque em "Suspensão" no app FIES CAIXA).',
+      'Confira os dados e o semestre, clique em "Confirmar" e aceite os termos.',
+      'Procure a CPSA da UCSal para validar o pedido. O sistema mostra o prazo máximo que ela tem para analisar.',
+      'Se quiser, imprima o Comprovante da Solicitação de Suspensão em "Ações".',
+    ],
+    notes: [
+      'Dá para suspender por até 2 semestres consecutivos e, excepcionalmente, por mais 1, com justificativa formal (a 3ª solicitação exige justificativa).',
+      'O semestre suspenso conta como semestre de utilização: o prazo total do financiamento fica 1 semestre menor.',
+      'Depois de solicitada, a suspensão não pode ser cancelada. Também não dá para suspender o semestre atual se o anterior estiver sem aditamento ou suspensão.',
+      'Suspensão integral (você não fez a contratação nem o aditamento do semestre): pode ser pedida a qualquer momento com o calendário aberto. Não há repasse do financiamento naquele semestre, mas a coparticipação é devida até o mês da suspensão.',
+      'Suspensão parcial (você já fez o aditamento do semestre): pedir entre os dias 1 e 15 de janeiro a maio (1º semestre) ou de julho a novembro (2º semestre). Repasse e coparticipação valem até o mês da suspensão.',
+      'Semestre anterior que ficou pendente: Contrato FIES > Manutenção > Pendência de Aditamento > Suspensão.',
+    ],
+    links: [SIFES],
+    fontes: [cartilha('5')],
+  }),
+  E({
+    id: 'fies-dilatacao',
+    status: 'verified',
+    title: 'FIES: dilatação (mais semestres de financiamento)',
+    keywords: ['dilat', 'prazo de utilizacao'],
+    intro: 'A dilatação é para quem está perto do fim do prazo de utilização do financiamento e precisa de mais semestres para concluir o curso.',
+    steps: [
+      'Peça no período certo: até o dia 15 do mês seguinte ao fim do período de utilização (1º semestre: de 01/12 a 15/01; 2º semestre: de 01/06 a 15/07).',
+      'Com o contrato adimplente, entre no SIFESWeb em Contrato FIES > Manutenção > Solicitar Dilatação (ou toque em "Dilatação" no app, que só aparece para quem está apto).',
+      'Confira os dados, clique em "Confirmar" e confirme de novo na pergunta.',
+      'Acompanhe o prazo de validação da CPSA e vá à UCSal receber o DRD, que é um documento só de guarda.',
+      'Depois da aprovação, peça já à instituição o aditamento de renovação do semestre vigente.',
+    ],
+    notes: [
+      'Só dá para dilatar um semestre por vez, até 4 vezes. O valor dos semestres dilatados também tem um limite, ligado aos dois últimos semestres contratados (a cartilha da CAIXA detalha).',
+    ],
+    links: [SIFES],
+    fontes: [cartilha('6')],
+  }),
+  E({
+    id: 'fies-encerramento',
+    status: 'verified',
+    title: 'FIES: encerramento antecipado',
+    keywords: ['encerro o fies', 'encerro meu fies', 'encerrar o fies', 'encerrar meu fies', 'encerrar o contrato', 'encerrar meu contrato', 'encerro o contrato', 'encerrar o financiamento', 'encerrar meu financiamento', 'encerramento antecipado', 'encerramento do contrato', 'encerramento do fies', 'amortiz', 'quitar o fies', 'quitar meu fies', 'liquidar o fies', 'liquidacao do fies', 'saldo devedor', 'sair do fies', 'cancelar o fies', 'cancelar meu fies', 'desistir do fies'],
+    intro: 'O encerramento antecipado é para quem não precisa mais do financiamento. Só é possível com a coparticipação em dia e, depois de solicitado, não dá para cancelar.',
+    steps: [
+      'Se a CPSA já iniciou seu aditamento e você não quer validá-lo, rejeite o aditamento primeiro.',
+      'No SIFESWeb, vá em Contrato FIES > Manutenção > Solicitar Encerramento (ou toque em "Encerramento" no app).',
+      'Escolha uma das três opções: Liquidação (paga todo o saldo devedor na efetivação), Manter utilização (mantém o período restante e só começa a amortizar depois dele) ou Antecipar amortização (começa a amortizar logo).',
+      'Marque o Termo de Aceite, se escolheu manter utilização ou antecipar amortização, e confirme.',
+      'Compareça à agência da CAIXA nas datas informadas na tela para assinar o termo de encerramento.',
+    ],
+    notes: [
+      'Encerramento integral (sem aditamento no semestre): pode ser pedido a qualquer momento com o calendário aberto. Não há repasse naquele semestre, e a coparticipação é devida até o mês do encerramento.',
+      'Encerramento parcial (você já fez o aditamento): peça entre os dias 1 e 15 de janeiro a maio ou de julho a novembro. Repasse e coparticipação valem até o mês do encerramento.',
+      'Escolhido "Manter utilização" ou "Antecipar amortização", você pode amortizar ou liquidar quando quiser, mas não pode trocar o tipo de encerramento.',
+    ],
+    links: [SIFES],
+    fontes: [cartilha('7')],
+  }),
+  E({
+    id: 'fies-coparticipacao',
+    status: 'verified',
+    title: 'FIES: coparticipação, boletos e atraso',
+    keywords: ['copartic', 'reparcel', 'debito em conta', 'prestamista', 'pagamento do fies', 'pagar o fies', 'pagar meu fies', 'pago o fies', 'pago meu fies', 'boleto do fies', 'parcela do fies', 'parcelas do fies', 'vencimento do fies', 'mensalidade do fies', 'atraso do fies'],
+    intro: 'Coparticipação é o pagamento da parte não financiada da mensalidade. O que você paga à CAIXA soma coparticipação, seguro prestamista, tarifa de serviço e taxa de administração.',
+    ordered: false,
+    steps: [
+      'Vencimento: dia 15 de cada mês, e a data não pode ser alterada.',
+      'Débito em conta: nos contratos assinados a partir do 2º semestre de 2019, o pagamento é por débito em conta. Mantenha saldo: depositar no dia do débito não faz o débito dar certo.',
+      'Sem saldo ou sem débito em conta: gere o boleto no SIFESWeb em Contrato FIES > Contrato > "Boleto(s) em aberto" (dias úteis, 9h às 19h).',
+      'Os meses anteriores ao início da cobrança pela CAIXA são pagos direto à instituição, conforme a data de assinatura do contrato (a cartilha da CAIXA traz a tabela).',
+    ],
+    notes: [
+      'A CAIXA leva até 5 dias úteis para reconhecer o pagamento. Atraso impede validar o aditamento e pedir dilatação ou encerramento.',
+      'Parcelas em atraso: existe o reparcelamento da coparticipação em Contrato FIES > Reparcelamento da Coparticipação. A instituição tem 5 dias para aceitar ou negar, e você paga um boleto de entrada.',
+    ],
+    links: [SIFES],
+    fontes: [cartilha('8, 9 e 10')],
+  }),
+  E({
+    id: 'fies-percentual',
+    status: 'verified',
+    title: 'FIES Social e percentual de financiamento',
+    keywords: ['fies social', 'cadunico', 'cad unico', 'percentual de financiamento', 'percentual do fies', 'percentual do financiamento', 'aumentar o percentual', 'aumentar meu percentual', 'diminuir o percentual', 'diminuir meu percentual', 'alterar o percentual', 'alterar meu percentual', 'aumentar o financiamento', 'aumentar meu financiamento', 'diminuir o financiamento', 'diminuir meu financiamento', 'financiamento de 100', 'financiamento 100', 'prouni e fies', 'fies e prouni', 'fies com prouni', 'prouni com fies'],
+    intro: 'O percentual de financiamento é definido pelo FNDE/MEC na contratação e não muda ao longo do contrato, a não ser que você decida diminuí-lo.',
+    ordered: false,
+    steps: [
+      'Regra geral: você só pode diminuir o percentual, no aditamento de renovação. Depois de diminuído, não dá para aumentar de novo, e a sua coparticipação sobe.',
+      'FIES Social (Portaria MEC 167/2024): para quem o MEC identifica pelo CadÚnico e pela renda per capita, o financiamento pode chegar a 100%. O SIFES avisa no primeiro aditamento em que você é identificado, e só nele você pode aumentar o percentual.',
+      'No aditamento, responda "Sim" a "Você deseja alterar o seu percentual de financiamento?" e simule os valores (tecla TAB no site, lupa no app). O novo percentual só é gravado quando você confirma.',
+      'Mesmo com 100% há seguro prestamista e encargos operacionais, e coparticipação se a mensalidade passar do teto de financiamento.',
+    ],
+    notes: [
+      'Com bolsa parcial do Prouni, o FIES incide sobre a mensalidade já descontado o Prouni. Exemplo da cartilha: mensalidade de R$ 1.000 com 50% de Prouni e 50% de FIES. O FIES vale sobre R$ 500 e você paga R$ 250 de coparticipação, além de seguro e taxas.',
+      'Dúvida sobre seu enquadramento no FIES Social: MEC, 0800 616161, ou pelo portal de atendimento do MEC.',
+    ],
+    links: [
+      {
+        label: 'Perguntas frequentes do FIES Social (CAIXA)',
+        href: 'https://www.caixa.gov.br/programas-sociais/fies/perguntas-frequentes-fies-social/Paginas/default.aspx',
+      },
+    ],
+    fontes: [cartilha('3.1, 3.5 e 10')],
+  }),
+  E({
+    id: 'fies-compromisso',
+    status: 'verified',
+    title: 'Teto de financiamento e Compromisso FIES',
+    keywords: ['compromisso fies', 'teto do fies', 'teto de financiamento', 'valor maximo financiado', 'valor maximo do fies', 'limite do fies', 'limite de financiamento', 'cobrar a diferenca', 'diferenca da mensalidade', 'diferenca entre a mensalidade', 'cobranca indevida'],
+    intro: 'O valor financiado pelo FIES por semestre tem limites. Para contratos novos a partir de 1º/2026, a Resolução MEC nº 63/2025 criou o Compromisso FIES, um valor de referência que limita o que a instituição pode cobrar de quem tem FIES.',
+    ordered: false,
+    steps: [
+      'Tetos (cartilha v4.7): R$ 42.983,70 por semestre; R$ 78.000,00 para Medicina (a partir do semestre 2/2025); mínimo de R$ 300,00.',
+      'Com 100% de financiamento, não há coparticipação: o boleto traz só seguro prestamista e taxa administrativa.',
+      'Abaixo de 100%, há coparticipação calculada sobre o Compromisso FIES. Exemplo da CAIXA em Medicina, com Compromisso de R$ 78.000: com 50% de financiamento, a coparticipação é de R$ 39.000, mais seguro e taxa.',
+      'A instituição não pode cobrar de você a diferença entre a mensalidade dela e o Compromisso FIES, nem como complemento da coparticipação, taxa adicional ou outra cobrança.',
+    ],
+    notes: [
+      'Viu uma cobrança assim? Procure imediatamente a instituição ou os canais oficiais do FIES (Alô CAIXA 4004 0104 nas capitais e regiões metropolitanas, 0800 104 0104 nas demais).',
+    ],
+    fontes: [cartilha('3.1 e 3.6')],
+  }),
+
   E({
     id: 'rematricula',
     status: 'verified',
@@ -243,6 +465,7 @@ export const knowledge = [
     notes: [
       'Quem não renova a matrícula entra em situação de abandono e perde a vaga se não pedir reingresso em até 4 semestres.',
       'Para voltar após trancamento ou abandono, também há o portal de inscrição, opção "Reingresso" (inscricao.ucsal.br).',
+      'Tem FIES? Trancar na UCSal não suspende o contrato com a CAIXA: é preciso pedir a suspensão no SIFESWeb e a UCSal validar. Pergunte: "Como suspendo meu FIES?".',
     ],
     links: [WA, { label: 'inscricao.ucsal.br', href: 'https://inscricao.ucsal.br/' }],
     fontes: [manual('4.6 a 4.10 e 4.21')],
@@ -453,6 +676,7 @@ export const knowledge = [
       'CRA (Central de Relacionamento com o Aluno): documentos, protocolos, transferência, reserva de vaga e cancelamento de veterano. Presencial: seg–sex 7h–20h30, sáb 7h–11h.',
       'WhatsApp institucional: (71) 3206-7800.',
       'Setor de Matrículas (calouros): cancelamento e ingresso · ingresso@ucsal.br · seg–sex 8h–21h, sáb 8h–12h.',
+      'FIES: contrato, SIFESWeb e boletos com a CAIXA (Alô CAIXA 4004 0104 nas capitais e regiões metropolitanas; 0800 104 0104 nas demais). Aditamento, suspensão e dilatação passam pela CPSA da UCSal.',
       'Coordenação do curso: atividades complementares, estudo dirigido e dúvidas do seu curso.',
       'Biblioteca: bibpituacu@ucsal.br · (71) 3206-7816.',
       'NED (AVA e disciplinas digitais): (71) 3206-7844 · contatocead@ucsal.br.',
@@ -592,6 +816,21 @@ export const suggestionGroups = [
       ['Como cumpro as horas complementares?', 'atividades-complementares'],
       ['Onde encontro uma atividade no AVA?', 'ava'],
       ['Como encontro uma sala ou bloco?', 'salas-blocos'],
+    ],
+  },
+  {
+    titulo: 'FIES',
+    itens: [
+      ['O que é o Novo FIES?', 'fies'],
+      ['Como acesso o SIFESWeb?', 'fies-sifes'],
+      ['Como renovo meu FIES?', 'fies-aditamento'],
+      ['O que é a CPSA?', 'fies-cpsa'],
+      ['Como suspendo meu FIES?', 'fies-suspensao'],
+      ['Como peço a dilatação do FIES?', 'fies-dilatacao'],
+      ['Como encerro o FIES antes do fim?', 'fies-encerramento'],
+      ['Como pago a coparticipação?', 'fies-coparticipacao'],
+      ['Posso aumentar meu percentual de financiamento?', 'fies-percentual'],
+      ['O que é o Compromisso FIES?', 'fies-compromisso'],
     ],
   },
   {

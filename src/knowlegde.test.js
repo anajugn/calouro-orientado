@@ -35,6 +35,20 @@ describe('perguntas livres de calouros', () => {
     ['Tem bolsa de estudo?', 'financiamento'],
     ['Como vejo o calendário acadêmico?', 'calendario'],
     ['Estou pensando em me matar', 'plenus'],
+    ['Como faço o aditamento do FIES?', 'fies-aditamento'],
+    ['Posso renovar o FIES depois do prazo?', 'fies-aditamento'],
+    ['Onde pego o DRM?', 'fies-cpsa'],
+    ['Trancar a matrícula suspende o FIES?', 'fies-suspensao'],
+    ['Como funciona a dilatação do FIES?', 'fies-dilatacao'],
+    ['Quero encerrar meu contrato do FIES', 'fies-encerramento'],
+    ['O boleto do FIES venceu, e agora?', 'fies-coparticipacao'],
+    ['Como pago a mensalidade do FIES?', 'fies-coparticipacao'],
+    ['Quero aumentar meu financiamento para 100%', 'fies-percentual'],
+    ['Sou do FIES Social, o que muda?', 'fies-percentual'],
+    ['A UCSal pode cobrar a diferença da mensalidade?', 'fies-compromisso'],
+    ['Não consigo acessar o SIFESWeb', 'fies-sifes'],
+    ['Como me inscrevo no FIES?', 'financiamento'],
+    ['Quais os deveres de quem tem FIES?', 'fies'],
   ])('%s -> %s', (q, id) => {
     expect(firstId(q)).toBe(id)
   })
@@ -70,6 +84,12 @@ describe('regras do projeto', () => {
   it('entradas parciais dizem o que falta confirmar', () => {
     for (const e of knowledge.filter((x) => x.status === 'partial')) {
       expect(e.pending.length, e.id).toBeGreaterThan(0)
+    }
+  })
+
+  it('entradas de FIES citam a cartilha da CAIXA', () => {
+    for (const e of knowledge.filter((x) => x.id.startsWith('fies'))) {
+      expect(e.fontes.some((f) => f.tipo === 'cartilha'), e.id).toBe(true)
     }
   })
 })

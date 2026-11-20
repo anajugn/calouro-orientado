@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
-import { canais, findAnswers, MANUAL_URL, quickQuestions, suggestionGroups } from './knowledge'
+import { canais, CARTILHA_URL, findAnswers, MANUAL_URL, quickQuestions, suggestionGroups } from './knowledge'
 import { addRecord } from './storage'
 import { GOOGLE_FORM } from './config'
 
 const FONTES = {
   manual: 'Manual do Aluno UCSal 2025',
+  cartilha: 'Cartilha do Estudante FIES v4.7 (CAIXA)',
   base: 'Base de conhecimento do projeto (Portal do Aluno)',
 }
 
@@ -31,6 +32,29 @@ function Canais() {
   )
 }
 
+function Fonte({ f }) {
+  const secao = f.secao ? `, seção ${f.secao}` : ''
+  if (f.tipo === 'manual') {
+    return (
+      <A href={MANUAL_URL}>
+        {FONTES.manual}
+        {secao}
+      </A>
+    )
+  }
+  if (f.tipo === 'cartilha') {
+    return CARTILHA_URL ? (
+      <A href={CARTILHA_URL}>
+        {FONTES.cartilha}
+        {secao}
+      </A>
+    ) : (
+      `${FONTES.cartilha}${secao}`
+    )
+  }
+  return FONTES.base
+}
+
 function Fontes({ fontes }) {
   return (
     <p className="source">
@@ -38,14 +62,7 @@ function Fontes({ fontes }) {
       {fontes.map((f, i) => (
         <span key={i}>
           {i > 0 && '; '}
-          {f.tipo === 'manual' ? (
-            <A href={MANUAL_URL}>
-              {FONTES.manual}
-              {f.secao ? `, seção ${f.secao}` : ''}
-            </A>
-          ) : (
-            FONTES.base
-          )}
+          <Fonte f={f} />
         </span>
       ))}
     </p>
